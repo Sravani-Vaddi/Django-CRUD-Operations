@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        h1{
+            color: red;
+            text-align: center;
+        }
+        body{
+            background-color: antiquewhite;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .center {
+            text-align: center;
+            font-size: large;
+        }
+        .center form {
+            border: 2px solid #ccc; /* Add border around the form */
+            padding: 20px;
+             /* Add padding inside the border for better spacing */
+        }
+    </style>
+</head>
+<body>
+    <h1>Application Form</h1>
+    <div class="center">
+    <form id="applicationForm" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Apply</button>
+        <button type="button" id="resetFormButton">Back</button>
+    </form>
+   </div><br><br>
+   <h1>Applied people</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Roll No</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Dob</th>
+                <th>Current Company</th>
+                <th>Exp in Years</th>
+                <th>salary</th>
+                <th>mobile</th>
+                <th>State</th>
+                <th>Resume</th>
+                <th>Actions</th>
+                <!-- Add other fields as needed -->
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in data %}
+            <tr>
+                <td>{{ item.rollno }}</td>
+                <td>{{ item.name }}</td>
+                <td>{{ item.email }}</td>
+                <td>{{ item.Dob }}</td>
+                <td>{{ item.currentcompany  }}</td>
+                <td>{{ item.Exp_in_yr }}</td>
+                <td>{{ item.salary }}</td>
+                <td>{{ item.mobile }}</td>
+                <td>{{ item.state }}</td>
+                <td>{{ item.resume }}</td>
+                <td>
+                    <a href="{% url 'update' item.pk %}">Update</a>
+                    <a href="{% url 'delete' item.pk %}">Delete</a>
+                </td>
+                <!-- Add other fields as needed -->
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <script>
+        document.getElementById('resetFormButton').addEventListener('click', function() {
+            document.getElementById('applicationForm').reset();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!-- success.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Success</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        body{
+            color: brown;
+            background-color: antiquewhite;
+        }
+    </style>
+</head>
+<body>
+    <h1>Successfully Applied</h1>
+    <h2>Applied people:</h2>
+    <button type="button" id="resetFormButton">Back To application form</button>
+    <table>
+        <thead>
+            <tr>
+                <th>Roll No</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Dob</th>
+                <th>Current Company</th>
+                <th>Exp in Years</th>
+                <th>salary</th>
+                <th>mobile</th>
+                <th>State</th>
+                <th>Actions</th>
+                <!-- Add other fields as needed -->
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in data %}
+            <tr>
+                <td>{{ item.rollno }}</td>
+                <td>{{ item.name }}</td>
+                <td>{{ item.email }}</td>
+                <td>{{ item.Dob }}</td>
+                <td>{{ item.currentcompany  }}</td>
+                <td>{{ item.Exp_in_yr }}</td>
+                <td>{{ item.salary }}</td>
+                <td>{{ item.mobile }}</td>
+                <td>{{ item.state }}</td>
+                <td>{{ item.resume }}</td>
+                <td>
+                    <a href="{% url 'update' item.pk %}">Update</a>
+                    <a href="{% url 'delete' item.pk %}">Delete</a>
+                </td>
+                <!-- Add other fields as needed -->
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <script>
+        document.getElementById('resetFormButton').addEventListener('click', function() {
+            window.location.href = '/basic/';
+        });
+    </script>
+    
+</body>
+</html>
+
